@@ -1,15 +1,16 @@
 <?php
+namespace adLDAP;
 /**
  * PHP LDAP CLASS FOR MANIPULATING ACTIVE DIRECTORY 
- * Version 4.0.4
+ * Version 5.0.0
  * 
  * PHP Version 5 with SSL and LDAP support
  * 
  * Written by Scott Barnett, Richard Hyland
  *   email: scott@wiggumworld.com, adldap@richardhyland.com
- *   http://adldap.sourceforge.net/
+ *   http://github.com/adldap/adLDAP
  * 
- * Copyright (c) 2006-2012 Scott Barnett, Richard Hyland
+ * Copyright (c) 2006-2014 Scott Barnett, Richard Hyland
  * 
  * We'd appreciate any improvements or additions to be submitted back
  * to benefit the entire community :)
@@ -27,11 +28,10 @@
  * @category ToolsAndUtilities
  * @package adLDAP
  * @author Scott Barnett, Richard Hyland
- * @copyright (c) 2006-2012 Scott Barnett, Richard Hyland
+ * @copyright (c) 2006-2014 Scott Barnett, Richard Hyland
  * @license http://www.gnu.org/licenses/old-licenses/lgpl-2.1.html LGPLv2.1
- * @revision $Revision: 169 $
- * @version 4.0.4
- * @link http://adldap.sourceforge.net/
+ * @version 5.0.0
+ * @link http://github.com/adldap/adLDAP
  */
 
 /**
@@ -217,18 +217,18 @@ class adLDAP {
     /**
     * The group class
     * 
-    * @var adLDAPGroups
+    * @var \adLDAP\classes\adLDAPGroups
     */
     protected $groupClass;
     
     /**
     * Get the group class interface
     * 
-    * @return adLDAPGroups
+    * @return \adLDAP\classes\adLDAPGroups
     */
     public function group() {
         if (!$this->groupClass) {
-            $this->groupClass = new adLDAPGroups($this);
+            $this->groupClass = new \adLDAP\classes\adLDAPGroups($this);
         }   
         return $this->groupClass;
     }
@@ -236,18 +236,18 @@ class adLDAP {
     /**
     * The user class
     * 
-    * @var adLDAPUsers
+    * @var \adLDAP\classes\adLDAPUsers
     */
     protected $userClass;
     
     /**
     * Get the userclass interface
     * 
-    * @return adLDAPUsers
+    * @return \adLDAP\classes\adLDAPUsers
     */
     public function user() {
         if (!$this->userClass) {
-            $this->userClass = new adLDAPUsers($this);
+            $this->userClass = new \adLDAP\classes\adLDAPUsers($this);
         }   
         return $this->userClass;
     }
@@ -255,18 +255,18 @@ class adLDAP {
     /**
     * The folders class
     * 
-    * @var adLDAPFolders
+    * @var \adLDAP\classes\adLDAPFolders
     */
     protected $folderClass;
     
     /**
     * Get the folder class interface
     * 
-    * @return adLDAPFolders
+    * @return \adLDAP\classes\adLDAPFolders
     */
     public function folder() {
         if (!$this->folderClass) {
-            $this->folderClass = new adLDAPFolders($this);
+            $this->folderClass = new \adLDAP\classes\adLDAPFolders($this);
         }   
         return $this->folderClass;
     }
@@ -274,18 +274,18 @@ class adLDAP {
     /**
     * The utils class
     * 
-    * @var adLDAPUtils
+    * @var \adLDAP\classes\adLDAPUtils
     */
     protected $utilClass;
     
     /**
     * Get the utils class interface
     * 
-    * @return adLDAPUtils
+    * @return \adLDAP\classes\adLDAPUtils
     */
     public function utilities() {
         if (!$this->utilClass) {
-            $this->utilClass = new adLDAPUtils($this);
+            $this->utilClass = new \adLDAP\classes\adLDAPUtils($this);
         }   
         return $this->utilClass;
     }
@@ -293,18 +293,18 @@ class adLDAP {
     /**
     * The contacts class
     * 
-    * @var adLDAPContacts
+    * @var \adLDAP\classes\adLDAPContacts
     */
     protected $contactClass;
     
     /**
     * Get the contacts class interface
     * 
-    * @return adLDAPContacts
+    * @return \adLDAP\classes\adLDAPContacts
     */
     public function contact() {
         if (!$this->contactClass) {
-            $this->contactClass = new adLDAPContacts($this);
+            $this->contactClass = new \adLDAP\classes\adLDAPContacts($this);
         }   
         return $this->contactClass;
     }
@@ -312,18 +312,18 @@ class adLDAP {
     /**
     * The exchange class
     * 
-    * @var adLDAPExchange
+    * @var \adLDAP\classes\adLDAPExchange
     */
     protected $exchangeClass;
     
     /**
     * Get the exchange class interface
     * 
-    * @return adLDAPExchange
+    * @return \adLDAP\classes\adLDAPExchange
     */
     public function exchange() {
         if (!$this->exchangeClass) {
-            $this->exchangeClass = new adLDAPExchange($this);
+            $this->exchangeClass = new \adLDAP\classes\adLDAPExchange($this);
         }   
         return $this->exchangeClass;
     }
@@ -331,18 +331,18 @@ class adLDAP {
     /**
     * The computers class
     * 
-    * @var adLDAPComputers
+    * @var \adLDAP\classes\adLDAPComputers
     */
     protected $computersClass;
     
     /**
     * Get the computers class interface
     * 
-    * @return adLDAPComputers
+    * @return \adLDAP\classes\adLDAPComputers
     */
     public function computer() {
         if (!$this->computerClass) {
-            $this->computerClass = new adLDAPComputers($this);
+            $this->computerClass = new \adLDAP\classes\adLDAPComputers($this);
         }   
         return $this->computerClass;
     }
@@ -557,7 +557,7 @@ class adLDAP {
     * Tries to bind to the AD domain over LDAP or LDAPs
     * 
     * @param array $options Array of options to pass to the constructor
-    * @throws Exception - if unable to bind to Domain Controller
+    * @throws \Exception - if unable to bind to Domain Controller
     * @return bool
     */
     function __construct($options = array()) {
@@ -846,60 +846,60 @@ class adLDAP {
         // Check every attribute to see if it contains 8bit characters and then UTF8 encode them
         array_walk($attributes, array($this, 'encode8bit'));
 
-        if ($attributes["address_city"]) { $mod["l"][0]=$attributes["address_city"]; }
-        if ($attributes["address_code"]) { $mod["postalCode"][0]=$attributes["address_code"]; }
+        if (isset($attributes["address_city"])){ $mod["l"][0]=$attributes["address_city"]; }
+        if (isset($attributes["address_code"])){ $mod["postalCode"][0]=$attributes["address_code"]; }
         //if ($attributes["address_country"]){ $mod["countryCode"][0]=$attributes["address_country"]; } // use country codes?
-        if ($attributes["address_country"]) { $mod["c"][0]=$attributes["address_country"]; }
-        if ($attributes["address_pobox"]) { $mod["postOfficeBox"][0]=$attributes["address_pobox"]; }
-        if ($attributes["address_state"]) { $mod["st"][0]=$attributes["address_state"]; }
-        if ($attributes["address_street"]) { $mod["streetAddress"][0]=$attributes["address_street"]; }
-        if ($attributes["company"]) { $mod["company"][0]=$attributes["company"]; }
-        if ($attributes["change_password"]) { $mod["pwdLastSet"][0]=0; }
-        if ($attributes["department"]) { $mod["department"][0]=$attributes["department"]; }
-        if ($attributes["description"]) { $mod["description"][0]=$attributes["description"]; }
-        if ($attributes["display_name"]) { $mod["displayName"][0]=$attributes["display_name"]; }
-        if ($attributes["email"]) { $mod["mail"][0]=$attributes["email"]; }
-        if ($attributes["expires"]) { $mod["accountExpires"][0]=$attributes["expires"]; } //unix epoch format?
-        if ($attributes["firstname"]) { $mod["givenName"][0]=$attributes["firstname"]; }
-        if ($attributes["home_directory"]) { $mod["homeDirectory"][0]=$attributes["home_directory"]; }
-        if ($attributes["home_drive"]) { $mod["homeDrive"][0]=$attributes["home_drive"]; }
-        if ($attributes["initials"]) { $mod["initials"][0]=$attributes["initials"]; }
-        if ($attributes["logon_name"]) { $mod["userPrincipalName"][0]=$attributes["logon_name"]; }
-        if ($attributes["manager"]) { $mod["manager"][0]=$attributes["manager"]; }  //UNTESTED ***Use DistinguishedName***
-        if ($attributes["office"]) { $mod["physicalDeliveryOfficeName"][0]=$attributes["office"]; }
-        if ($attributes["password"]) { $mod["unicodePwd"][0]=$this->user()->encodePassword($attributes["password"]); }
-        if ($attributes["profile_path"]) { $mod["profilepath"][0]=$attributes["profile_path"]; }
-        if ($attributes["script_path"]) { $mod["scriptPath"][0]=$attributes["script_path"]; }
-        if ($attributes["surname"]) { $mod["sn"][0]=$attributes["surname"]; }
-        if ($attributes["title"]) { $mod["title"][0]=$attributes["title"]; }
-        if ($attributes["telephone"]) { $mod["telephoneNumber"][0]=$attributes["telephone"]; }
-        if ($attributes["mobile"]) { $mod["mobile"][0]=$attributes["mobile"]; }
-        if ($attributes["pager"]) { $mod["pager"][0]=$attributes["pager"]; }
-        if ($attributes["ipphone"]) { $mod["ipphone"][0]=$attributes["ipphone"]; }
-        if ($attributes["web_page"]) { $mod["wWWHomePage"][0]=$attributes["web_page"]; }
-        if ($attributes["fax"]) { $mod["facsimileTelephoneNumber"][0]=$attributes["fax"]; }
-        if ($attributes["enabled"]) { $mod["userAccountControl"][0]=$attributes["enabled"]; }
-        if ($attributes["homephone"]) { $mod["homephone"][0]=$attributes["homephone"]; }
-        
+        if (isset($attributes["address_country"])){ $mod["c"][0]=$attributes["address_country"]; }
+        if (isset($attributes["address_pobox"])){ $mod["postOfficeBox"][0]=$attributes["address_pobox"]; }
+        if (isset($attributes["address_state"])){ $mod["st"][0]=$attributes["address_state"]; }
+        if (isset($attributes["address_street"])){ $mod["streetAddress"][0]=$attributes["address_street"]; }
+        if (isset($attributes["company"])){ $mod["company"][0]=$attributes["company"]; }
+        if (isset($attributes["change_password"])){ $mod["pwdLastSet"][0]=0; }
+        if (isset($attributes["department"])){ $mod["department"][0]=$attributes["department"]; }
+        if (isset($attributes["description"])){ $mod["description"][0]=$attributes["description"]; }
+        if (isset($attributes["display_name"])){ $mod["displayName"][0]=$attributes["display_name"]; }
+        if (isset($attributes["email"])){ $mod["mail"][0]=$attributes["email"]; }
+        if (isset($attributes["expires"])){ $mod["accountExpires"][0]=$attributes["expires"]; } //unix epoch format?
+        if (isset($attributes["firstname"])){ $mod["givenName"][0]=$attributes["firstname"]; }
+        if (isset($attributes["home_directory"])){ $mod["homeDirectory"][0]=$attributes["home_directory"]; }
+        if (isset($attributes["home_drive"])){ $mod["homeDrive"][0]=$attributes["home_drive"]; }
+        if (isset($attributes["initials"])){ $mod["initials"][0]=$attributes["initials"]; }
+        if (isset($attributes["logon_name"])){ $mod["userPrincipalName"][0]=$attributes["logon_name"]; }
+        if (isset($attributes["manager"])){ $mod["manager"][0]=$attributes["manager"]; }  //UNTESTED ***Use DistinguishedName***
+        if (isset($attributes["office"])){ $mod["physicalDeliveryOfficeName"][0]=$attributes["office"]; }
+        if (isset($attributes["password"])){ $mod["unicodePwd"][0]=$this->user()->encodePassword($attributes["password"]); }
+        if (isset($attributes["profile_path"])){ $mod["profilepath"][0]=$attributes["profile_path"]; }
+        if (isset($attributes["script_path"])){ $mod["scriptPath"][0]=$attributes["script_path"]; }
+        if (isset($attributes["surname"])){ $mod["sn"][0]=$attributes["surname"]; }
+        if (isset($attributes["title"])){ $mod["title"][0]=$attributes["title"]; }
+        if (isset($attributes["telephone"])){ $mod["telephoneNumber"][0]=$attributes["telephone"]; }
+        if (isset($attributes["mobile"])){ $mod["mobile"][0]=$attributes["mobile"]; }
+        if (isset($attributes["pager"])){ $mod["pager"][0]=$attributes["pager"]; }
+        if (isset($attributes["ipphone"])){ $mod["ipphone"][0]=$attributes["ipphone"]; }
+        if (isset($attributes["web_page"])){ $mod["wWWHomePage"][0]=$attributes["web_page"]; }
+        if (isset($attributes["fax"])){ $mod["facsimileTelephoneNumber"][0]=$attributes["fax"]; }
+        if (isset($attributes["enabled"])){ $mod["userAccountControl"][0]=$attributes["enabled"]; }
+        if (isset($attributes["homephone"])){ $mod["homephone"][0]=$attributes["homephone"]; }
+
         // Distribution List specific schema
-        if ($attributes["group_sendpermission"]) { $mod["dlMemSubmitPerms"][0]=$attributes["group_sendpermission"]; }
-        if ($attributes["group_rejectpermission"]) { $mod["dlMemRejectPerms"][0]=$attributes["group_rejectpermission"]; }
-        
+        if (isset($attributes["group_sendpermission"])){ $mod["dlMemSubmitPerms"][0]=$attributes["group_sendpermission"]; }
+        if (isset($attributes["group_rejectpermission"])){ $mod["dlMemRejectPerms"][0]=$attributes["group_rejectpermission"]; }
+
         // Exchange Schema
-        if ($attributes["exchange_homemdb"]) { $mod["homeMDB"][0]=$attributes["exchange_homemdb"]; }
-        if ($attributes["exchange_mailnickname"]) { $mod["mailNickname"][0]=$attributes["exchange_mailnickname"]; }
-        if ($attributes["exchange_proxyaddress"]) { $mod["proxyAddresses"][0]=$attributes["exchange_proxyaddress"]; }
-        if ($attributes["exchange_usedefaults"]) { $mod["mDBUseDefaults"][0]=$attributes["exchange_usedefaults"]; }
-        if ($attributes["exchange_policyexclude"]) { $mod["msExchPoliciesExcluded"][0]=$attributes["exchange_policyexclude"]; }
-        if ($attributes["exchange_policyinclude"]) { $mod["msExchPoliciesIncluded"][0]=$attributes["exchange_policyinclude"]; }       
-        if ($attributes["exchange_addressbook"]) { $mod["showInAddressBook"][0]=$attributes["exchange_addressbook"]; }    
-        if ($attributes["exchange_altrecipient"]) { $mod["altRecipient"][0]=$attributes["exchange_altrecipient"]; } 
-        if ($attributes["exchange_deliverandredirect"]) { $mod["deliverAndRedirect"][0]=$attributes["exchange_deliverandredirect"]; }    
-        
+        if (isset($attributes["exchange_homemdb"])){ $mod["homeMDB"][0]=$attributes["exchange_homemdb"]; }
+        if (isset($attributes["exchange_mailnickname"])){ $mod["mailNickname"][0]=$attributes["exchange_mailnickname"]; }
+        if (isset($attributes["exchange_proxyaddress"])){ $mod["proxyAddresses"][0]=$attributes["exchange_proxyaddress"]; }
+        if (isset($attributes["exchange_usedefaults"])){ $mod["mDBUseDefaults"][0]=$attributes["exchange_usedefaults"]; }
+        if (isset($attributes["exchange_policyexclude"])){ $mod["msExchPoliciesExcluded"][0]=$attributes["exchange_policyexclude"]; }
+        if (isset($attributes["exchange_policyinclude"])){ $mod["msExchPoliciesIncluded"][0]=$attributes["exchange_policyinclude"]; } 
+        if (isset($attributes["exchange_addressbook"])){ $mod["showInAddressBook"][0]=$attributes["exchange_addressbook"]; }
+        if (isset($attributes["exchange_altrecipient"])){ $mod["altRecipient"][0]=$attributes["exchange_altrecipient"]; } 
+        if (isset($attributes["exchange_deliverandredirect"])){ $mod["deliverAndRedirect"][0]=$attributes["exchange_deliverandredirect"]; }    
+
         // This schema is designed for contacts
-        if ($attributes["exchange_hidefromlists"]) { $mod["msExchHideFromAddressLists"][0]=$attributes["exchange_hidefromlists"]; }
-        if ($attributes["contact_email"]) { $mod["targetAddress"][0]=$attributes["contact_email"]; }
-        
+        if (isset($attributes["exchange_hidefromlists"])){ $mod["msExchHideFromAddressLists"][0]=$attributes["exchange_hidefromlists"]; }
+        if (isset($attributes["contact_email"])){ $mod["targetAddress"][0]=$attributes["contact_email"]; }
+
         //echo ("<pre>"); print_r($mod);
         /*
         // modifying a name is a bit fiddly
@@ -986,6 +986,6 @@ class adLDAP {
 *   exit();
 * }
 */
-class adLDAPException extends Exception {}
+class adLDAPException extends \Exception {}
 
 ?>

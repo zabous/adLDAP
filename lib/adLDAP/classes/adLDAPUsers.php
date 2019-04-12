@@ -497,6 +497,14 @@ class adLDAPUsers {
     */
     public function encodePassword($password) {
         $password="\"".$password."\"";
+        // support for foreign characters
+        if (function_exists("mb_convert_encoding")) {
+          $retval = mb_convert_encoding($password, "UTF-16LE");
+        } else {
+          $encoded="";
+          for ($i=0; $i <strlen($password); $i++){ $encoded.="{$password{$i}}\000"; }
+        }  
+        
         $encoded="";
         for ($i=0; $i <strlen($password); $i++) { $encoded.="{$password{$i}}\000"; }
         return $encoded;
